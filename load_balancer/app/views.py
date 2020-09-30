@@ -1,7 +1,10 @@
+import math
+import time
+
 from app import app
-from .helpers import get_categories_list, get_meta_data
 
 from .consts import METADATA_API_URI
+from .helpers import get_categories_list, get_meta_data
 
 
 @app.route("/info", methods=["GET"])
@@ -10,6 +13,9 @@ def index():
     return get_meta_data(categories)
 
 
-@app.route("/", methods=["GET"])
-def abc():
-    return "1231223"
+@app.route("/load", methods=["GET"])
+def load():
+    start_time = time.clock()
+    while time.clock() - start_time < 20:
+        math.factorial(100)
+    return "Нагрузило, проверяй"
