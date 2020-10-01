@@ -8,14 +8,16 @@ from .helpers import get_categories_list, get_meta_data
 
 
 @app.route("/info", methods=["GET"])
-def index():
+def info():
+    """Method to get MetaData info"""
     categories = get_categories_list(METADATA_API_URI)
     return get_meta_data(categories)
 
 
 @app.route("/load", methods=["GET"])
 def load():
+    """Method to initiates fake CPU stress"""
     start_time = time.clock()
     while time.clock() - start_time < 20:
         math.factorial(100)
-    return "Нагрузило, проверяй"
+    return "Нагрузка успешно создана"
