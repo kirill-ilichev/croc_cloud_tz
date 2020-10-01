@@ -18,6 +18,6 @@ def info():
 def load():
     """Method to initiates fake CPU stress"""
     start_time = time.clock()
-    while time.clock() - start_time < 20:
+    while time.clock() - start_time < 40:
         math.factorial(100)
     return "Нагрузка успешно создана"
