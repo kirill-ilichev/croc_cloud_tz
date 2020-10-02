@@ -15,7 +15,9 @@ def decode_string(bytes_or_string: Union[str, bytes]) -> str:
 def get_categories_list(uri: str) -> list:
     """Get all meta categories as list"""
     categories = requests.get(uri).content
-    return decode_string(categories).split('\n')
+    if categories:
+        return decode_string(categories).split('\n')
+    return []
 
 
 def get_meta_data(paths: list, category_name: str = None):
@@ -45,6 +47,10 @@ def get_category_instance(
     # if path ends with slash it means that this is path to nested category
     if path.endswith("/"):
         categories = get_categories_list(uri_with_path)
+        # if no categories return empty string
+        if not categories:
+            meta_data.update({category_name: ""})
+            return meta_data
         # add path to each category to get full category path
         category_paths = list(
             map(lambda category: path + category, categories)
