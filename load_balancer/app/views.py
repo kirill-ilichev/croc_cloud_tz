@@ -6,7 +6,7 @@ from flask import redirect, url_for
 
 from app import app
 from .consts import METADATA_API_URI
-from .helpers import get_categories_list, get_meta_data
+from .helpers import get_categories_list, get_meta_data, decode_string
 
 
 @app.route('/')
@@ -25,7 +25,9 @@ def info():
 def load():
     """Method to initiates fake CPU stress"""
     try:
-        public_ip = requests.get(METADATA_API_URI+"public-ipv4")
+        public_ip = decode_string(
+            requests.get(METADATA_API_URI + "public-ipv4").content
+        )
         public_ip_text = "Публичный IP ноды - {0}".format(public_ip)
     except requests.exceptions.ConnectionError:
         public_ip_text = "Не удалось получить публичный IP ноды"
