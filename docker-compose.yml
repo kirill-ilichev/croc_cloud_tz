@@ -3,7 +3,7 @@ version: "3"
 services:
 
   flask:
-    build: ./load_balancer
+    build: nodes_app
     container_name: flask
     restart: always
     environment:

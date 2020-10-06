@@ -32,6 +32,6 @@ def load():
     except requests.exceptions.ConnectionError:
         public_ip_text = "Не удалось получить публичный IP ноды"
     start_time = time.clock()
-    while time.clock() - start_time < 80:
+    while time.clock() - start_time < 55:
         math.factorial(999999)
     return "Нагрузка успешно создана. {0}".format(public_ip_text)
